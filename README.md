@@ -1,50 +1,67 @@
-# Welcome to your Expo app 👋
+# 🍊 OrangeSense: Orange Yield Estimation
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Mobile application to monitor orange harvests detected by a camera-equipped drone.
+It shows how many oranges were counted, how many are good or defective, and how production changes over time.
 
-## Get started
+This app is the user interface of a drone-based fruit detection project. Oranges are detected in images with a YOLO model (`assets/yolo11n.pt`), and the results are displayed in the app.
 
-1. Install dependencies
+## Features
 
-   ```bash
-   npm install
-   ```
+| Screen | What it shows |
+|---|---|
+| **Dashboard** | Entry point to all sections of the app |
+| **Summary** | Total oranges, share of good vs. defective oranges, and storage quality tips |
+| **Trend analysis** | Evolution of the production over time |
+| **History** | Monthly data: total, good, bad, quality rate and change |
+| **Drone tracking** | Flight information (battery, altitude, speed, signal) and mission details |
+| **Account** | Registration and login (JWT authentication) |
 
-2. Start the app
+> The drone tracking screen currently uses demo values.
 
-   ```bash
-    npx expo start
-   ```
+## Tech stack
 
-In the output, you'll find options to open the app in a
+- **Mobile app:** React Native with Expo, React Navigation, Axios
+- **Backend API:** Node.js, Express, MongoDB (Mongoose), JWT authentication, Multer for image uploads
+- **Detection model:** YOLO11n (Ultralytics)
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Project structure
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+├── App.js, index.js          # App entry points
+├── *Screen.js                # App screens (Dashboard, Summary, Trends, History, Tracking)
+├── components/               # Shared UI components (Navbar)
+├── store/                    # Authentication state
+├── api.js                    # API client (Axios)
+├── assets/                   # Images, fonts and the YOLO model
+└── backend/
+    ├── server.js             # Express server
+    ├── routes/               # API routes (auth, users, data, activities)
+    ├── controllers/          # Route logic
+    ├── models/               # MongoDB models
+    ├── middlewares/          # Auth and CORS
+    └── config/               # Database connection
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Getting started
 
-## Learn more
+### Backend
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+cd backend
+npm install
+cp .env.example .env    # then fill in your own values
+npm start
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### Mobile app
 
-## Join the community
+```bash
+npm install
+npx expo start
+```
 
-Join our community of developers creating universal apps.
+Open the app with Expo Go on your phone, or in an Android/iOS emulator.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Author
+
+Skandar Makari · [GitHub](https://github.com/MakariSkander)
